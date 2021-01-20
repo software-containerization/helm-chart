@@ -5,5 +5,5 @@ metadata:
   labels:
     app: mysql
 data:
-  MYSQL_DATABASE: mysqldb
-  MYSQL_USER: mysqladmin
+  MYSQL_DATABASE: {{ .Values.database.name}}
+  MYSQL_USER: {{ .Values.database.user}}

@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/opt/mysql/data"
+    path: {{ .Values.database.hostPath }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
