@@ -5,5 +5,5 @@ metadata:
   labels:
     app: mysql
 data:
-  MYSQL_DB: mysqldb
+  MYSQL_DATABASE: mysqldb
   MYSQL_USER: mysqladmin
