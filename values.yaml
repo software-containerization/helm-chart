@@ -5,3 +5,7 @@ database:
   rootPassword: YWRtaW4= # admin
   password: YWRtaW4= # admin
   hostPath: "/opt/mysql/data"
+
+todo_api:
+  port: 8080
+
