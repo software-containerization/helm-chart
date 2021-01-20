@@ -77,3 +77,12 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+todo_api:
+  port: 8080
+  database:
+    user: root
+    password: admin
+    host: 127.0.0.1
+    port: 3306
+    name: todo
