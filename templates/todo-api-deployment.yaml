@@ -16,8 +16,8 @@ spec:
         app: todo_api
     spec:
       containers:
-        - name: {{ .Values.todo_api.container.name }}
-          image: {{ .Values.todo_api.container.image }}
+        - name: todo_api_container
+          image: "localhost:36000/todo-api:v1"
           ports:
             - containerPort: {{ .Values.todo_api.port }}
           env:
