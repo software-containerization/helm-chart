@@ -16,7 +16,7 @@ docker build -t localhost:32000/todo-api:v1 todo/todo-backend
 
 # Enable microk8s registry
 microk8s start
-microk8s enable registryk
+microk8s enable registry
 
 # Push to the microk8s registry
 docker push localhost:32000/todo-api:v1
