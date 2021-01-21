@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prom-deployment
-  namespace: monitoring
   labels:
     app: prometheus
 spec:
@@ -14,7 +13,6 @@ spec:
       labels:
         app: prometheus
     spec:
-      serviceAccountName: prometheus
       containers:
       - name: prom-container
         image: prom/prometheus:v2.1.0
@@ -22,14 +20,9 @@ spec:
         - containerPort: 9090
           name: default
         volumeMounts:
-        # - name: prom-persistent-storage
-        #   mountPath: /etc/prometheus
         - name: config-volume
           mountPath: /etc/prometheus
       volumes:
-      # - name: prom-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: prom-pvc
       - name: config-volume
         configMap:
           name: prometheus-config 
