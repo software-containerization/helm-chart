@@ -14,8 +14,12 @@ git clone https://github.com/software-containerization/todo.git
 # Build the image
 docker build -t localhost:32000/todo-api:v1 todo/todo-backend
 
+# Enable microk8s registry
+microk8s start
+microk8s enable registryk
+
 # Push to the microk8s registry
-docker push localhost:32000/todo-api
+docker push localhost:32000/todo-api:v1
 
 echo "Removing temp dir"
 cd .. && rm -rf temp
