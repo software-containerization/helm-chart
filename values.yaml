@@ -15,3 +15,6 @@ todoApi:
 
 prometheus:
   nodePort: "30909"
+
+tls:
+  email: example@gmail.com
