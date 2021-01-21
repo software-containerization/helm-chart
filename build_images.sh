@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit
-fi
-
 echo "Creating temp dir"
 mkdir temp && cd temp
 
@@ -12,14 +7,14 @@ mkdir temp && cd temp
 git clone https://github.com/software-containerization/todo.git
 
 # Build the image
-docker build -t localhost:32000/todo-api:v1 todo/todo-backend
+sudo docker build -t localhost:32000/todo-api:v1 todo/todo-backend
 
 # Enable microk8s registry
-microk8s start
-microk8s enable registry
+sudo microk8s start
+sudo microk8s enable registry
 
 # Push to the microk8s registry
-docker push localhost:32000/todo-api:v1
+sudo docker push localhost:32000/todo-api:v1
 
 echo "Removing temp dir"
 cd .. && rm -rf temp
