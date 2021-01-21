@@ -21,10 +21,6 @@ microk8s enable registryk
 # Push to the microk8s registry
 docker push localhost:32000/todo-api:v1
 
-# frontend
-
-docker build --build-args API_URL=yamlparse(apiUrl) -t localhost:32000/todo-api:v1 todo/todo-backend
-
 docker run -e API_URL=iets
 echo "Removing temp dir"
 cd .. && rm -rf temp
