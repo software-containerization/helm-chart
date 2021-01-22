@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-frontend-deployment
+  labels:
+    app: todo-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo-frontend
+  template: 
+    metadata:
+      labels:
+        app: todo-frontend
+    spec:
+      containers:
+        - name: todo-frontend-container
+          image: localhost:32000/todo-app:v2
+          ports:
+            - containerPort: 80
+          env:
+            - name: API_BASE_URL
+              value: "todo-api.com"
