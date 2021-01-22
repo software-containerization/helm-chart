@@ -9,7 +9,7 @@ database:
   port: "3306"
 
 todoApi:
-  image: localhost:32000/todo-api:v1
+  image: localhost:32000/todoapie:v1
   port: "8080"
   targetPort: "8080"
 
