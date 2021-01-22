@@ -2,10 +2,19 @@ database:
   image: mysql:8.0
   name: mysqldb
   user: mysqladmin
+  host: mysql-service
   rootPassword: YWRtaW4= # admin
   password: YWRtaW4= # admin
   hostPath: "/opt/mysql/data"
+  port: "3306"
 
-todo_api:
-  port: 8080
+todoApi:
+  image: localhost:32000/todoapie:v1
+  port: "8080"
+  targetPort: "8080"
 
+prometheus:
+  nodePort: "30909"
+
+tls:
+  email: example@gmail.com
