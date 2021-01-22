@@ -9,12 +9,17 @@ database:
   port: "3306"
 
 todoApi:
-  image: localhost:32000/todoapie:v1
+  image: localhost:32000/todo-api:v4
   port: "8080"
   targetPort: "8080"
 
+todoFE:
+  image: localhost:32000/todo-frontend:v4
+  
 prometheus:
   nodePort: "30909"
 
+
+  
 tls:
   email: example@gmail.com
