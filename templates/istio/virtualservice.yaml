@@ -1,0 +1,61 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: todo-app-gateway
+  namespace: todo-app
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: todo-virtualservice
+  namespace: todo-app
+spec:
+  hosts:
+    - "todo-app.com"
+  gateways:
+    - todo-app/todo-app-gateway
+  http:
+    - match:
+      - uri:
+          prefix: /api
+      route:
+        - destination:
+            host: todo-api-service
+            port:
+              number: 8080
+    - match:
+      - uri:
+          prefix: /
+      route:
+        - destination:
+            host: todo-frontend-service
+            port:
+              number: 8091
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: prometheus-virtualservice
+  namespace: istio-system
+spec:
+  hosts:
+    - "prometheus.todo-app.com"
+  gateways:
+    - todo-app/todo-app-gateway
+  http:
+    - route:
+        - destination:
+            host: prometheus
+            port:
+              number: 9090
+

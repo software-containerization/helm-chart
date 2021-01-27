@@ -21,4 +21,4 @@ spec:
             - containerPort: 80
           env:
             - name: API_BASE_URL
-              value: "http://api.todo-app.com:10080/api"
+              value: {{ .Values.todoApi.url}}

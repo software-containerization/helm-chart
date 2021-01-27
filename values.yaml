@@ -12,6 +12,7 @@ todoApi:
   image: localhost:32000/todo-api:v4
   port: "8080"
   targetPort: "8080"
+  url: 10.50.100.5/api
 
 todoFE:
   image: localhost:32000/todo-frontend:v4
