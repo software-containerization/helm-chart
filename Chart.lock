@@ -1,0 +1,9 @@
+dependencies:
+- name: metallb
+  repository: https://charts.bitnami.com/bitnami/
+  version: 1.0.0
+- name: istio
+  repository: https://storage.googleapis.com/istio-release/releases/1.5.1/charts
+  version: 1.5.1
+digest: sha256:3fdb5c7badaaed8fcfb312a5ddfa94b83d76067255fdb0799840de0a3e2bf7a4
+generated: "2021-01-27T16:08:07.432053103Z"
