@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: mysql-config
   labels:
-    app: mysql
+    app: {{ .Values.database.labelApp }}
 data:
   MYSQL_DATABASE: {{ .Values.database.name}}
   MYSQL_USER: {{ .Values.database.user}}

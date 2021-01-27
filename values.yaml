@@ -1,3 +1,5 @@
+namespace: todo
+
 database:
   image: mysql:8.0
   name: mysqldb
@@ -6,21 +8,39 @@ database:
   rootPassword: YWRtaW4= # admin
   password: YWRtaW4= # admin
   hostPath: "/opt/mysql/data"
-  port: "3306"
+  port: 3306
+  labelApp: mysql
 
-todoApi:
-  image: localhost:32000/todo-api:v4
-  port: "8080"
-  targetPort: "8080"
+api:
+  serviceName: todo-api-service
+  labelApp: todo-api
+  image: localhost:32000/todo-api:v1
+  clusterIpPort: 8080
+  clusterIpTargetPort: 8080
+  replicas: 3
+  uriPrefix: /api
   url: 10.50.100.5/api
 
-todoFE:
-  image: localhost:32000/todo-frontend:v4
+frontend:
+  serviceName: todo-api-frontend
+  labelApp: todo-frontend
+  image: localhost:32000/todo-frontend:v1
+  clusterIpPort: 8091
+  clusterIpTargetPort: 80
+  replicas: 3
+  uriPrefix: /
   
+istio:
+  gateway:
+    name: todo-app-gateway
+    externalPort: 80
+  appVirtualService:
+    host: todo-app.com
+
 prometheus:
-  nodePort: "30909"
-
-
+  host: prometheus.todo-app.com
+  serviceName: prometheus
+  clusterIpPort: 9090
   
 tls:
   email: example@gmail.com

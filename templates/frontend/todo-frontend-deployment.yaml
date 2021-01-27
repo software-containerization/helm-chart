@@ -3,22 +3,22 @@ kind: Deployment
 metadata:
   name: todo-frontend-deployment
   labels:
-    app: todo-frontend
+    app: {{ .Values.frontend.labelApp }}
 spec:
-  replicas: 3
+  replicas: {{ .Values.frontend.repicas }}
   selector:
     matchLabels:
-      app: todo-frontend
+      app: {{ .Values.frontend.labelApp }}
   template: 
     metadata:
       labels:
-        app: todo-frontend
+        app: {{ .Values.frontend.labelApp }}
     spec:
       containers:
         - name: todo-frontend-container
-          image: {{ .Values.todoFE.image }}
+          image: {{ .Values.frontend.image }}
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.frontend.clusterIpTargetPort }}
           env:
             - name: API_BASE_URL
-              value: {{ .Values.todoApi.url}}
+              value: {{ .Values.api.url}}

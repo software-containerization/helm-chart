@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: mysql-service
   labels:
-    app: mysql
+    app: {{ .Values.database.labelApp }}
 spec:
   ports:
-  - port: 3306
+  - port: {{ .Values.database.port }}
   selector:
-    app: mysql
+    app: {{ .Values.database.labelApp }}
   clusterIP: None
