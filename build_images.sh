@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ $# -eq 0 ]; then
+    echo "Please provide a number as an argument to tag the images with. e.g. ./build_images.sh 4"
+    exit 1
+fi
+
 echo "Creating temp dir"
 mkdir temp && cd temp
 
