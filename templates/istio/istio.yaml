@@ -7,12 +7,25 @@ spec:
   selector:
     istio: ingressgateway # use istio default controller
   servers:
-  - port:
-      number: {{ .Values.istio.gateway.externalPort}}
-      name: http
-      protocol: HTTP
+  - 
     hosts:
-    - "*"
+    - {{ .Values.istio.host | indent 4 }} 
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
+    tls:
+      httpsRedirect: true
+  - 
+    hosts:
+    - {{ .Values.istio.host | indent 4 }} 
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: {{ .Values.tls.secretName }}
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -21,7 +34,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   hosts:
-    - {{ .Values.istio.appVirtualService.host | indent 4}}
+    - {{ .Values.istio.host | indent 4 }}
   gateways:
     - {{ .Values.namespace }}/{{ .Values.istio.gateway.name }}
   http:

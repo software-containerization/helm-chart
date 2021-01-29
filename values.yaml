@@ -31,11 +31,9 @@ frontend:
   uriPrefix: /
   
 istio:
+  host: todo-app.com
   gateway:
     name: todo-app-gateway
-    externalPort: 80
-  appVirtualService:
-    host: todo-app.com
 
 prometheus:
   host: prometheus.todo-app.com
@@ -43,4 +41,8 @@ prometheus:
   clusterIpPort: 9090
   
 tls:
+  issuerName: selfsigned-issuer
+  issuerKind: ClusterIssuer
   email: example@gmail.com
+  secretName: selfsigned-secret
+  # certName: letsencrypt-certificate
