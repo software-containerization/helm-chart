@@ -42,7 +42,7 @@ prometheus:
   
 tls:
   issuerName: selfsigned-issuer
-  issuerKind: ClusterIssuer
+  issuerKind: Issuer
   email: example@gmail.com
   secretName: selfsigned-secret
   # certName: letsencrypt-certificate

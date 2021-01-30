@@ -1,20 +1,21 @@
-# # Issuer
-# apiVersion: cert-manager.io/v1
-# kind: {{ .Values.tls.issuerKind }}
-# metadata:
-#   name: {{ .Values.tls.issuerName}} # Set as Issuer
-#   namespace: istio-system
-# spec:
-#   ca:
-#     secretName: ca-key-pair
-
-
-# ClusterIssuer
+# Issuer
 apiVersion: cert-manager.io/v1
 kind: {{ .Values.tls.issuerKind }}
 metadata:
-  name: {{ .Values.tls.issuerName}} # Set as ClusterIssuer
+  name: {{ .Values.tls.issuerName}} # Set as Issuer
   # namespace: istio-system
+  namespace: {{ .Values.namespace}}
 spec:
   ca:
     secretName: ca-key-pair
+
+
+# ClusterIssuer
+# apiVersion: cert-manager.io/v1
+# kind: {{ .Values.tls.issuerKind }}
+# metadata:
+#   name: {{ .Values.tls.issuerName}} # Set as ClusterIssuer
+#   # namespace: istio-system
+# spec:
+#   ca:
+#     secretName: ca-key-pair
