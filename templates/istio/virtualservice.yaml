@@ -8,11 +8,12 @@ spec:
     istio: ingressgateway # use istio default controller
   servers:
   - port:
-      number: {{ .Values.istio.gateway.externalPort}}
+      number: 443
       name: http
-      protocol: HTTP
+      protocol: HTTPS
     hosts:
-    - "*"
+    - "sc-todo.nl"
+    - "www.sc-todo.nl"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService

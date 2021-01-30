@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sc-todo.nl
+  namespace: {{ .Values.namespace }}
+spec:
+  secretName: {{ .Values.sectretName }}
+  duration: 2160h
+  renewBefore: 360h
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - "sc-todo.nl"
+    - "www.sc-todo.nl"
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
+
