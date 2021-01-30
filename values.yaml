@@ -26,6 +26,7 @@ frontend:
   serviceName: todo-api-frontend
   labelApp: todo-frontend
   image: gcr.io/todo-303012/todo-frontend:v1
+  version: v1
   clusterIpPort: 8091
   clusterIpTargetPort: 80
   replicas: 3
@@ -33,6 +34,7 @@ frontend:
   useCanary: true
   canary:
     replicas: 1
+    version: v2
     image: gcr.io/todo-303012/todo-frontend:v2
   
 istio:
