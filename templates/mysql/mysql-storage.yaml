@@ -9,31 +9,15 @@ spec:
   accessModes:
     - ReadWriteOnce
   gcePersistentDisk:
-    pdName: todo-mysql-pv
+    pdName: todo-mysql-pv #make sure that this gce presistentDisk already exist in the cloud
     fsType: ext4
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv
-  labels:
-    type: local
-spec:
-  storageClassName: microk8s-hostpath
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: {{ .Values.database.hostPath }}
-  persistentVolumeReclaimPolicy: Delete
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pvc
 spec:
-  storageClassName: microk8s-hostpath
+  storageClassName: {{ .Values.database.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
