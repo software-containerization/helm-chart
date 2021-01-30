@@ -43,13 +43,13 @@ spec:
               number: {{ .Values.frontend.clusterIpPort }}
 {{ if eq .Values.frontend.useCanary true }}
             subset: v1
-            weight: 70
+          weight: 70
         - destination:
             host: {{ .Values.frontend.serviceName }}
             subset: v2
-            weight: 30
             port:
               number: {{ .Values.frontend.clusterIpPort }}
+            weight: 30
 {{ end }}
 ---
 apiVersion: networking.istio.io/v1alpha3
