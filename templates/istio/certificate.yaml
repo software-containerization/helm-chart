@@ -2,9 +2,10 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: ingress-cert
-  namespace: istio-system
+  # namespace: istio-system
+  namespace: {{ .Values.namespace }}
 spec:
-  secretName: {{ .Values.tls.secretName}}
+  secretName: {{ .Values.tls.secretName }}
   dnsNames:
   - {{ .Values.istio.host | indent 2}}
   issuerRef:
