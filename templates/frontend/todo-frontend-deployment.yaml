@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.frontend.labelApp }}
+        version: {{ .Values.frontend.version }}
     spec:
       containers:
         - name: todo-frontend-container
@@ -39,6 +40,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.frontend.labelApp }}
+        version: {{ .Values.frontend.canary.version }}
     spec:
       containers:
         - name: todo-frontend-container

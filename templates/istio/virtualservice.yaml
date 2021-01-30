@@ -41,6 +41,16 @@ spec:
             host: {{ .Values.frontend.serviceName }}
             port:
               number: {{ .Values.frontend.clusterIpPort }}
+{{ if .Values.frontend.useCanary true }}
+            subset: v1
+            weight: 70
+        - destination:
+            host: {{ .Values.frontend.serviceName }}
+            subset: v2
+            weight: 30
+            port:
+              number: {{ .Values.frontend.clusterIpPort }}
+{{ end }}
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -58,4 +68,19 @@ spec:
           host: {{ .Values.prometheus.serviceName }}
           port:
             number: {{ .Values.prometheus.clusterIpPort }}
-
+{{ if .Values.frontend.useCanary true }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: todo
+spec:
+  host: {{ .Values.istio.appVirtualService.host }}
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+{{ end }}
