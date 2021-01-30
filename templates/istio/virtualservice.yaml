@@ -49,7 +49,7 @@ spec:
             subset: v2
             port:
               number: {{ .Values.frontend.clusterIpPort }}
-            weight: 30
+          weight: 30
 {{ end }}
 ---
 apiVersion: networking.istio.io/v1alpha3
