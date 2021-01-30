@@ -2,9 +2,9 @@
 apiVersion: cert-manager.io/v1
 kind: {{ .Values.tls.issuerKind }}
 metadata:
-  name: {{ .Values.tls.issuerName}} # Set as Issuer
+  name: {{ .Values.tls.issuerName }} # Set as Issuer
   # namespace: istio-system
-  namespace: {{ .Values.namespace}}
+  namespace: {{ .Values.namespace }}
 spec:
   ca:
     secretName: ca-key-pair
