@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-frontend-deployment
+  name: todo-frontend-deployment-canary
   labels:
     app: {{ .Values.frontend.labelApp }}
 spec:
-  replicas: {{ .Values.frontend.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.frontend.labelApp }}
@@ -13,11 +13,11 @@ spec:
     metadata:
       labels:
         app: {{ .Values.frontend.labelApp }}
-        version: v1
+        version: v2
     spec:
       containers:
         - name: todo-frontend-container
-          image: {{ .Values.frontend.image }}
+          image: gcr.io/todo-303012/todo-frontend:v2
           ports:
             - containerPort: {{ .Values.frontend.clusterIpTargetPort }}
           env:

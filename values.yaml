@@ -10,21 +10,22 @@ database:
   hostPath: "/opt/mysql/data"
   port: 3306
   labelApp: mysql
+  storageClassName: standard
 
 api:
   serviceName: todo-api-service
   labelApp: todo-api
-  image: localhost:32000/todo-api:v1
+  image: gcr.io/todo-303012/todo-api:v1.2
   clusterIpPort: 8080
   clusterIpTargetPort: 8080
   replicas: 3
   uriPrefix: /api
-  url: 10.50.100.5/api
+  url: http://sc-todo.nl/api
 
 frontend:
   serviceName: todo-api-frontend
   labelApp: todo-frontend
-  image: localhost:32000/todo-frontend:v1
+  image: gcr.io/todo-303012/todo-frontend:v1
   clusterIpPort: 8091
   clusterIpTargetPort: 80
   replicas: 3
@@ -34,10 +35,13 @@ istio:
   host: todo-app.com
   gateway:
     name: todo-app-gateway
+    externalPort: 80
+  appVirtualService:
+    host: sc-todo.nl
 
 prometheus:
-  host: prometheus.todo-app.com
-  serviceName: prometheus
+  host: prometheus.sc-todo.nl
+  serviceName: promsd
   clusterIpPort: 9090
   
 tls:
