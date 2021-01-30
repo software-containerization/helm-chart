@@ -11,6 +11,9 @@ spec:
       number: 443
       name: http
       protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: {{ .Values.secretName }}
     hosts:
     - "sc-todo.nl"
     - "www.sc-todo.nl"
