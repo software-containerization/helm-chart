@@ -41,7 +41,7 @@ spec:
             host: {{ .Values.frontend.serviceName }}
             port:
               number: {{ .Values.frontend.clusterIpPort }}
-{{ if .Values.frontend.useCanary true }}
+{{ if eq .Values.frontend.useCanary true }}
             subset: v1
             weight: 70
         - destination:
@@ -68,7 +68,7 @@ spec:
           host: {{ .Values.prometheus.serviceName }}
           port:
             number: {{ .Values.prometheus.clusterIpPort }}
-{{ if .Values.frontend.useCanary true }}
+{{ if eq .Values.frontend.useCanary true }}
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
