@@ -12,18 +12,8 @@ spec:
       number: 80
       protocol: HTTP
     hosts:
-    - "*"
-    tls:
-      httpsRedirect: true
-  - port:
-      name: https
-      number: 443
-      protocol: HTTPS
-    hosts:
-    - "*"
-    tls:
-      mode: SIMPLE
-      credentialName: cert-credential
+    - "istio.sc-todo.nl"
+    - "prometheus.istio.sc-todo.nl"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -60,7 +50,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - {{ .Values.prometheus.host}}
+    - {{ .Values.prometheus.istioHost}}
   gateways:
     - {{ .Values.namespace }}/{{ .Values.istio.gateway.name }}
   http:

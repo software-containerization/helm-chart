@@ -20,12 +20,13 @@ api:
   clusterIpTargetPort: 8080
   replicas: 3
   uriPrefix: /api
-  url: http://sc-todo.nl/api
+  url: http://istio.sc-todo.nl/api
 
 frontend:
   serviceName: todo-api-frontend
   labelApp: todo-frontend
   image: gcr.io/todo-303012/todo-frontend:v1
+  canaryImage: gcr.io/todo-303012/todo-frontend:v2
   clusterIpPort: 8091
   clusterIpTargetPort: 80
   replicas: 3
@@ -37,11 +38,12 @@ istio:
     name: todo-app-gateway
     externalPort: 80
   appVirtualService:
-    host: sc-todo.nl
+    host: istio.sc-todo.nl
 
 prometheus:
   host: prometheus.sc-todo.nl
-  serviceName: promsd
+  istioHost: prometheus.istio.sc-todo.nl
+  serviceName: prometheus
   clusterIpPort: 9090
   
 tls:

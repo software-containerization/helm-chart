@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: todo-frontend-container
-          image: gcr.io/todo-303012/todo-frontend:v2
+          image: {{ .Values.frontend.canaryImage }}
           ports:
             - containerPort: {{ .Values.frontend.clusterIpTargetPort }}
           env:
