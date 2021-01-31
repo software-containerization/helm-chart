@@ -5,7 +5,7 @@ metadata:
 spec:
   secretName: {{ .Values.tls.secretName }}
   dnsNames:
-  - {{ .Values.istio.host | indent 2 }}
+  - {{ .Values.host | indent 2 }}
   issuerRef:
     name: {{ .Values.tls.issuerName }}
     kind: {{ .Values.tls.issuerKind }}
