@@ -18,7 +18,7 @@ spec:
         - name: todo-api-container
           image: {{ .Values.api.image }}
           ports:
-            - containerPort: {{ .Values.api.clusterIpTargetPort }}
+            - containerPort: {{ .Values.api.targetPort}}
               protocol: TCP
           env:
             - name: TODO_DB_USER
@@ -30,7 +30,7 @@ spec:
             - name: TODO_DB_NAME
               value: {{ .Values.database.name }}
             - name: TODO_PORT
-              value: {{ quote .Values.api.clusterIpTargetPort }}
+              value: {{ quote .Values.api.targetPort}}
             - name: TODO_DB_PASSWD
               valueFrom:
                 secretKeyRef:

@@ -1,4 +1,5 @@
 namespace: todo
+host: sc-todo.nl
 
 database:
   image: mysql:8.0
@@ -14,34 +15,27 @@ database:
 
 api:
   serviceName: todo-api-service
+  serviceType: NodePort
   labelApp: todo-api
   image: gcr.io/todo-303012/todo-api:v1.2
-  clusterIpPort: 8080
-  clusterIpTargetPort: 8080
+  port: 8080
+  targetPort: 8080
   replicas: 3
   uriPrefix: /api
-  url: http://sc-todo.nl/api
+  url: https://sc-todo.nl/api
 
 frontend:
-  serviceName: todo-api-frontend
+  serviceName: todo-frontend-service
+  serviceType: NodePort
   labelApp: todo-frontend
   image: gcr.io/todo-303012/todo-frontend:v1
-  clusterIpPort: 8091
-  clusterIpTargetPort: 80
+  port: 80
+  targetPort: 80
   replicas: 3
   uriPrefix: /
   
-istio:
-  gateway:
-    name: todo-app-gateway
-    externalPort: 80
-  appVirtualService:
-    host: sc-todo.nl
-
-prometheus:
-  host: prometheus.sc-todo.nl
-  serviceName: promsd
-  clusterIpPort: 9090
-  
 tls:
   email: example@gmail.com
+  issuerName: ca-issuer
+  issuerKind: ClusterIssuer
+  secretName: ca-secret

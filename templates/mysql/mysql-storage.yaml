@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   gcePersistentDisk:
-    pdName: todo-mysql-pv #make sure that this gce presistentDisk already exist in the cloud
+    pdName: todo-mysql-pv # Make sure that this gce presistentDisk already exist in the GCP.
     fsType: ext4
 ---
 apiVersion: v1

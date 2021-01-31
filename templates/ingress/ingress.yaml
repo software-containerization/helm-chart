@@ -1,0 +1,24 @@
+apiVersion: "extensions/v1beta1"
+kind: "Ingress"
+metadata:
+  name: "todo-ingress"
+  annotations:
+      kubernetes.io/ingress.class: "gce"
+      cert-manager.io/cluster-issuer: {{ .Values.tls.issuerName }}
+spec:
+  tls:
+  - hosts:
+    - {{ .Values.host | indent 4 }}
+    secretName: {{ .Values.tls.secretName }}
+  rules:
+  - http:
+      paths:
+      - path: "/*"
+        backend:
+          serviceName: {{ .Values.frontend.serviceName }}
+          servicePort: {{ .Values.frontend.port }}
+      - path: "/api/*"
+        backend:
+          serviceName: {{ .Values.api.serviceName }}
+          servicePort: {{ .Values.api.port }}
+    host: {{ .Values.host }}

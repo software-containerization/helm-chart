@@ -8,11 +8,12 @@ spec:
     istio: ingressgateway # use istio default controller
   servers:
   - port:
-      number: {{ .Values.istio.gateway.externalPort}}
       name: http
+      number: 80
       protocol: HTTP
     hosts:
-    - "*"
+    - "istio.sc-todo.nl"
+    - "prometheus.istio.sc-todo.nl"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -21,7 +22,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   hosts:
-    - {{ .Values.istio.appVirtualService.host | indent 4}}
+    - {{ .Values.istio.appVirtualService.host | indent 4 }}
   gateways:
     - {{ .Values.namespace }}/{{ .Values.istio.gateway.name }}
   http:
@@ -49,7 +50,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-    - {{ .Values.prometheus.host}}
+    - {{ .Values.prometheus.istioHost}}
   gateways:
     - {{ .Values.namespace }}/{{ .Values.istio.gateway.name }}
   http:

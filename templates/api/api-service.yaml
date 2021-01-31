@@ -5,11 +5,13 @@ metadata:
   labels:
     app: {{ .Values.api.labelApp }}
     service: {{ .Values.api.labelApp }}
+  annotations:
+    cloud.google.com/backend-config: '{"default": "api-backend-config"}'
 spec:
-  type: ClusterIP
+  type: {{ .Values.api.serviceType }}
   ports:
   - protocol: TCP
-    port: {{ .Values.api.clusterIpPort }}
-    targetPort: {{ .Values.api.clusterIpTargetPort }}
+    port: {{ .Values.api.port }}
+    targetPort: {{ .Values.api.targetPort }}
   selector:
     app: {{ .Values.api.labelApp }}

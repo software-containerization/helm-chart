@@ -19,7 +19,7 @@ spec:
         - name: todo-frontend-container
           image: {{ .Values.frontend.image }}
           ports:
-            - containerPort: {{ .Values.frontend.clusterIpTargetPort }}
+            - containerPort: {{ .Values.frontend.targetPort}}
           env:
             - name: API_BASE_URL
               value: {{ .Values.api.url}}

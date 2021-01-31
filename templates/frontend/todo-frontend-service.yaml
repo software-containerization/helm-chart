@@ -6,10 +6,10 @@ metadata:
     app: {{ .Values.frontend.labelApp }}
     service: {{ .Values.frontend.labelApp }}
 spec: 
-  type: ClusterIP
+  type: {{ .Values.frontend.serviceType }}
   ports:
     - protocol: TCP
-      port: {{ .Values.frontend.clusterIpPort }}
-      targetPort: {{ .Values.frontend.clusterIpTargetPort }}
+      port: {{ .Values.frontend.port }}
+      targetPort: {{ .Values.frontend.targetPort }}
   selector: 
     app: {{ .Values.frontend.labelApp }}

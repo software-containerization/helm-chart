@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: ca-cert
+spec:
+  secretName: {{ .Values.tls.secretName }}
+  dnsNames:
+  - {{ .Values.istio.host | indent 2 }}
+  issuerRef:
+    name: {{ .Values.tls.issuerName }}
+    kind: {{ .Values.tls.issuerKind }}
